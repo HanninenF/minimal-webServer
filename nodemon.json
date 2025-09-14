@@ -1,0 +1,14 @@
+{
+  "exec": "node test.js",
+  "ext": "js",
+  "watch": ["**/*.js"],
+  "ignore": [
+    "index.css",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.map",
+    "package-lock.json",
+    "node_modules",
+    ".git"
+  ]
+}

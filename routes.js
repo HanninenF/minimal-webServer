@@ -19,7 +19,7 @@ const routes = {
     title: "Kontakt - Min Server",
     content: `
       Kontakta oss <br>
-      Epost: hello@exampel.se <br>
+      E-Post: hello@exampel.se <br>
       Telefon: 123-123 45 67 <br>
     `,
   },

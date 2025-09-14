@@ -4,7 +4,8 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass index.scss index.css --watch"
+    "sass": "sass index.scss index.css --watch",
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "ws": "^8.18.3"
   },
   "devDependencies": {
+    "nodemon": "^3.1.10",
     "sass": "^1.92.1"
   }
 }

@@ -4,16 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="title"></title>
     <script>
-      (function () {
-        try {
-          var proto = location.protocol === "https:" ? "wss" : "ws";
-          var ws = new WebSocket(proto + "://" + location.host);
-          ws.onmessage = function (e) {
-            if (e.data === "reload") location.reload();
-          };
-        } catch (e) {}
+      (function connect() {
+        var proto = location.protocol === "https:" ? "wss" : "ws";
+        var ws = new WebSocket(proto + "://" + location.host);
+
+        ws.onmessage = function (e) {
+          if (e.data === "reload") location.reload(); // HTML/CSS-save
+        };
+
+        ws.onclose = function () {
+          // JS-save -> nodemon restartar servern -> WS stängs
+          // Gör en mjuk reload strax efter att servern är uppe igen
+          setTimeout(function () {
+            location.reload();
+          }, 75);
+        };
+
+        ws.onerror = function () {
+          try {
+            ws.close();
+          } catch (_) {}
+        };
       })();
     </script>
+
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>

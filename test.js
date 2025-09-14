@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import renderAndSend from "./renderAndSend.js ";
+import renderAndSend from "./renderAndSend.js";
 import { readFile, watch as watchAsync } from "node:fs/promises";
 import { WebSocketServer } from "ws";
 import normalize from "./normalize.js";
@@ -37,12 +37,17 @@ const server = createServer(async (req, res) => {
 });
 
 const wss = new WebSocketServer({ server });
-(async () => {
-  const exts = [".html", ".css", ".js"];
 
-  for await (const evt of watchAsync(".", { recursive: false })) {
+(async () => {
+  const exts = [".html", ".css"]; // <-- bara klientresurser
+
+  let timer;
+  for await (const evt of watchAsync(".", { recursive: true })) {
     if (evt.filename && exts.some((ext) => evt.filename.endsWith(ext))) {
-      wss.clients.forEach((c) => c.readyState === 1 && c.send("reload"));
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        wss.clients.forEach((c) => c.readyState === 1 && c.send("reload"));
+      }, 80); // debounce 150ms
     }
   }
 })().catch((err) => console.error("watch failed:", err));
