@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass index.scss index.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "sass": "^1.92.1"
+  }
+}
